@@ -7,16 +7,16 @@ import styled from 'styled-components'
 const Score = () => {
    let nav = useNavigate();
    const userName = useSelector((state) => state.getUser)
-   console.log(userName)
+
     const reset = () =>{
-        nav('/')
+       nav('/')
     }
     return (
         <>
         <Contents>
             <Result>
                 <p><span>Netflix Original Series</span> 퀴즈에 대한</p>
-                <p><span>{userName.new_user}</span>님의 점수는요</p>
+                <p><span>{userName.userName}</span>님의 점수는요</p>
                 <p><span>80</span>점 입니다!</p>
             </Result> 
             <div>Wow! 이정도면 넷플릭스 덕후로 인정!</div>

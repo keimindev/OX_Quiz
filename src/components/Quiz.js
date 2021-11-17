@@ -7,16 +7,14 @@ import { getAnswer } from '../redux/modules/quizReducer';
 const Quiz = () => {                                       
     let navi = useNavigate();
     let dispatch = useDispatch();
-    const state = useSelector((state) => state.quiz);
-
-    console.log(state)
-
+    const state = useSelector((state) => state.quiz.quiz_list);
+    
     //왜 굳이 꼭 id? 여야하는지???
     const { id } = useParams();
 
     const nextQuiz =() =>{
         const numId = Number(id);
-        if(numId < 5){
+        if(numId < 9){
             //왜 리터럴 펨플릿을 써야하나요? id값이 숫자로 변환이 안되네요
               navi(`/quiz/${numId + 1}`)
             }else{
@@ -24,16 +22,15 @@ const Quiz = () => {
             }
     }
 
-    const clickFalse = () => {
-       dispatch(getAnswer({id: id, userA: 1}))
+    const clickFalse = (userAnswer) => {
+       dispatch(getAnswer({userAnswer: 1}))
        nextQuiz()
     }
 
-    const clickTrue = () =>{
-        dispatch(getAnswer({id: id, userA: 0}))
+    const clickTrue = (userAnswer) =>{
+        dispatch(getAnswer({userAnswer: 0}))
         nextQuiz()
     }
-
     return (
         <>
         <Wrapper>
@@ -42,8 +39,8 @@ const Quiz = () => {
             <div className="img"><img src={state[id].questionImg} alt="img" /></div>
             <Question>
                     <p>Question.<span>{state[id].id}</span></p>
-                    <span>{state[id].questionShow}</span>
-                    {state[id].question}            
+                    <p><span>{state[id].questionShow}</span>
+                    {state[id].question}</p>            
             </Question>
         </QuizContents>
         <AnswerBox>
@@ -94,7 +91,7 @@ const Question = styled.div`
     backgrounc-color: #ffffff;
     margin-top: 10px;
 
-    p{
+    p:nth-child(1){
         padding: 8px 6px;
         border-radius: 10px;
         background-color: #222;
@@ -108,14 +105,17 @@ const Question = styled.div`
         }
     }
 
-    span{
-        padding: 5px 10px;
-        background-color: #d81f26;
-        border-radius: 10px;
-        color: #fff;
-        margin-right: 5px;
-    }
-    `;
+    p:nth-child(2){
+        line-height: 30px;
+
+        span{
+            padding: 5px 10px;
+            background-color: #d81f26;
+            border-radius: 10px;
+            color: #fff;
+            margin-right: 5px;
+        }
+    }`;
 
 const AnswerBox = styled.div`
     ul{
@@ -133,6 +133,7 @@ const AnswerBox = styled.div`
             background-color: #fff;
             font-size: 30px;
             cursor: pointer;
+            transition: all 0.5s;
 
 
             &:hover{

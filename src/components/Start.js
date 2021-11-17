@@ -104,6 +104,13 @@ background-color:#d81f26;
 color: #fff;
 font-size: 18px;
 cursor: pointer;
+font-family: 'GongGothicMedium';
+transition: all 0.5s;
+
+
+&:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 `;
 
 const InputBox = styled.div`

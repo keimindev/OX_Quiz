@@ -2,7 +2,7 @@
 const GET = 'userReducer/getName';
 
 //default
-const initialState = []
+const initialState = {userName : ""}
 
 //Action Creators
 export function getName(user){
@@ -14,10 +14,8 @@ export default function getUser(state = initialState, action){
     switch(action.type){
         case GET : 
         {
-            const new_user = [...state, action.user];
-            return {
-                new_user
-            }
+            return {...state, userName:action.user};
+            
         }
         default : return state;
     }
