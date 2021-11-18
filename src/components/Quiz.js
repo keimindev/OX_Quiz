@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from "styled-components";
 import { getAnswer } from '../redux/modules/quizReducer';
+import ProgressBar from './ProgressBar';
 
 const Quiz = () => {                                       
     let navi = useNavigate();
@@ -14,7 +15,7 @@ const Quiz = () => {
 
     const nextQuiz =() =>{
         const numId = Number(id);
-        if(numId < 9){
+        if(numId < state.length-1){
             //왜 리터럴 펨플릿을 써야하나요? id값이 숫자로 변환이 안되네요
               navi(`/quiz/${numId + 1}`)
             }else{
@@ -23,18 +24,18 @@ const Quiz = () => {
     }
 
     const clickFalse = (userAnswer) => {
-       dispatch(getAnswer({userAnswer: 1}))
+       dispatch(getAnswer({userAnswer: false}))
        nextQuiz()
     }
 
     const clickTrue = (userAnswer) =>{
-        dispatch(getAnswer({userAnswer: 0}))
+        dispatch(getAnswer({userAnswer: true}))
         nextQuiz()
     }
     return (
         <>
         <Wrapper>
-        <ProcessBar>processbar</ProcessBar>
+        <ProgressBar/>
         <QuizContents>
             <div className="img"><img src={state[id].questionImg} alt="img" /></div>
             <Question>
@@ -58,15 +59,6 @@ const Wrapper = styled.div`
  padding: 0 20px;
 `;
 
-const ProcessBar = styled.div`
-width: 100%;
-height: 30px;
-background-color: red;
-border-radius: 15px;
-margin: 10px 0 30px 0;
-color: #ffffff;
-`;
-
 const QuizContents = styled.div`
 height: 400px;
 background-color: #fff;
@@ -88,7 +80,7 @@ border-radius: 10px;
 const Question = styled.div`
     width: 100%;
     height: 60px;
-    backgrounc-color: #ffffff;
+    background-color: #ffffff;
     margin-top: 10px;
 
     p:nth-child(1){

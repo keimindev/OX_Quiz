@@ -1,29 +1,31 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-
-import {useNavigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
+
+
 const Score = () => {
-   let nav = useNavigate();
    const userName = useSelector((state) => state.getUser)
 
-    const reset = () =>{
-       nav('/')
-    }
+   //get Score
+   const state = useSelector((state) => state.quiz.quiz_list);
+   const userAState = useSelector((state) => state.quiz.userAnswer_list);
+   let scoreArr = state.filter( (a, i) => a.answer === userAState[i]);
+   const scoreper = scoreArr.length * 10;
+
     return (
         <>
         <Contents>
             <Result>
                 <p><span>Netflix Original Series</span> 퀴즈에 대한</p>
                 <p><span>{userName.userName}</span>님의 점수는요</p>
-                <p><span>80</span>점 입니다!</p>
+                <p><span>{scoreper}</span>점 입니다!</p>
             </Result> 
             <div>Wow! 이정도면 넷플릭스 덕후로 인정!</div>
-            <Btns>
-                <button>정답보기</button>
-                <button onClick={reset}>다시 시작하기</button>
-            </Btns>
+            <Link to='/report'>
+            <ReBtn>한 마디 남기기</ReBtn>
+            </Link>
         </Contents>
            
         </>
@@ -83,41 +85,21 @@ p:nth-child(3){
 }`;
 
 
-const Btns = styled.div`
- width: 250px;
- margin: 100px auto;
-
- button{
-     display: block;
-     width: 250px;
-     padding: 10px 20px;
-     margin-top: 10px;
-     border-radius: 15px;
-     border: 0;
-     outline: 0;
-     background-color: #fff;
-     font-family: 'GongGothicMedium';
-     cursor: pointer;
- }
-
-
-
- button:nth-child(1){
-    color: #d81f26;
-    font-weight: 600;
-
-    &:hover{
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    }
- }
- button:nth-child(2){
-     background-color: #222;
-     color: #fff;
+ const ReBtn = styled.button`
+    width: 180px;
+    padding: 10px 20px;
+    margin: 100px auto;
+    border-radius: 15px;
+    border: 0;
+    outline: 0;
+    background-color: #fff;
+    font-family: 'GongGothicMedium';
+    cursor: pointer;
+     color: #222;
+     transition: all 0.5s ease;
      &:hover{
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
      }
- }
-
-`;
+ `;
 
 export default Score
