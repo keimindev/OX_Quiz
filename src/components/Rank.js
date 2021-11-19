@@ -1,30 +1,53 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { useRef} from 'react'
+import {useSelector } from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components'
 
 const Rank = () => {
+    const userInfo = useSelector(state => state.getUser.usersRank)
+    const nav = useNavigate();
+
+    const userslist = userInfo.sort(( x, y ) => {
+        if(x.score > y.score){return -1}
+        if( x.score < y.score){return 1}
+        if( x.score === y.score){return 0}
+    });
+
+    const currentUser = useRef(null)
+
+    const resetUserAnswer = () =>{
+        nav('/')
+    }
+
     return (
         <Main>
-            <Title><span>100</span> 명의 사람 중에 당신은?</Title>
+            <Title><span>{userInfo.length}</span> 명의 사람 중에 당신은?</Title>
             <RankList>
-                <List>
-                    <p><span>1</span>등</p>
-                    <div>
-                        <p>민</p>
-                        <p>한마디 남긴 이야기....</p>
-                    </div>
-                </List>
-                <List>
-                    <p><span>13</span>등</p>
-                    <div>
-                        <p>조세호</p>
-                        <p>한마디 남긴 이야기....</p>
-                    </div>
-                </List>
+                {userslist.map( (user, i) => {
+                    if(user.current){
+                        return (
+                            <List cur={true} key={i} ref={currentUser}>
+                            <p><span>{i+1}</span>등</p>
+                            <div>
+                                <p>{user.userN}</p>
+                                <p>{user.comment}</p>
+                            </div>
+                        </List>
+                        ) 
+                    }else{
+                        return (
+                            <List key={i}>
+                            <p><span>{i+1}</span>등</p>
+                            <div>
+                                <p>{user.userN}</p>
+                                <p>{user.comment}</p>
+                            </div>
+                        </List>
+                        )
+                    }
+                })}
             </RankList> 
-            <Link to="/">
-            <Button>재도전하기</Button>
-            </Link>
+            <Button onClick={resetUserAnswer}>재도전하기</Button>
         </Main>
     )
 }
@@ -48,19 +71,19 @@ const Title = styled.div`
 
 
 const RankList = styled.div`
-
+height: 90%;
+overflow-y: scroll;
 `;
 
 
 const List = styled.div`
 height: 100px;
 max-height: 400px;
-overflow-y: scroll;
 padding: 5px 10px;
 border: 1px solid red;
 border-radius: 10px;
 margin: 10px 0;
-background-color: #ffffff;
+background-color: ${(props) => (props.cur ? "#ac73d2" : "#ffffff")};
 
 display: grid;
 grid-template-columns: 30% 70%;

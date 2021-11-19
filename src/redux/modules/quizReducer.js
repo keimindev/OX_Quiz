@@ -79,10 +79,12 @@ userAnswer_list : []
 const CHECK_ANSWER = 'quizReducer/CHECK_ANSWER';
 
 
+
 // Action Creators
 export function getAnswer(quizAnswer) {
   return { type: CHECK_ANSWER, quizAnswer};
 }
+
 
 
 //Reducer 

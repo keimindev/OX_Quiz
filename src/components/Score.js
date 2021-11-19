@@ -1,12 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector , useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
-
-
+import { getUserScore } from '../redux/modules/userReducer'
 
 const Score = () => {
-   const userName = useSelector((state) => state.getUser)
+   const userInfo = useSelector((state) => state.getUser)
+   const rankState = useSelector((state) => state.getUser.usersRank)
+   console.log(rankState)
+   const dispatch = useDispatch()
 
    //get Score
    const state = useSelector((state) => state.quiz.quiz_list);
@@ -14,17 +16,31 @@ const Score = () => {
    let scoreArr = state.filter( (a, i) => a.answer === userAState[i]);
    const scoreper = scoreArr.length * 10;
 
+   const getScore = () => {
+       dispatch(getUserScore(scoreper))
+   }
+
+   //scorelist 
+   let scoreMention = '';
+   const mentions = useSelector((state) => state.getUser.scorelist)
+   Object.keys(mentions).map((c , i) => {
+    if(scoreper >= c){
+      return scoreMention = mentions[c]
+    }
+   })
+   
+
     return (
         <>
         <Contents>
             <Result>
                 <p><span>Netflix Original Series</span> 퀴즈에 대한</p>
-                <p><span>{userName.userName}</span>님의 점수는요</p>
+                <p><span>{userInfo.userName}</span>님의 점수는요</p>
                 <p><span>{scoreper}</span>점 입니다!</p>
             </Result> 
-            <div>Wow! 이정도면 넷플릭스 덕후로 인정!</div>
+            <Mention>{scoreMention}</Mention>
             <Link to='/report'>
-            <ReBtn>한 마디 남기기</ReBtn>
+            <ReBtn onClick={getScore}>한 마디 남기기</ReBtn>
             </Link>
         </Contents>
            
@@ -84,7 +100,9 @@ p:nth-child(3){
     }
 }`;
 
-
+const Mention = styled.div`
+padding: 0 80px;
+`;
  const ReBtn = styled.button`
     width: 180px;
     padding: 10px 20px;

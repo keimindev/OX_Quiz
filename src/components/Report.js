@@ -1,15 +1,29 @@
-import React from 'react'
+import React, {useRef} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import { getComment, updateRank } from '../redux/modules/userReducer'
 
 const Report = () => {
+    const user = useSelector(state => state.getUser)
+    const dispatch = useDispatch()
+    const text = useRef()
+    const getUserComment = () =>{
+        dispatch(getComment(text.current.value))
+        dispatch(updateRank(
+            {userN : user.userName,
+            score: user.userScore,
+            comment: text.current.value}
+            ))
+    }
+
     return (
         <Main>
             <img src="/assets/logo.jpg" alt="logo"/>
             <p><span> Netflix</span> 에게 남기는 한마디</p>
-            <input type="text" />
+            <input type="text" ref={text}/>
             <Link to="/rank">
-            <Button>남기고 랭킹 보러가기</Button>
+            <Button onClick={getUserComment}>남기고 랭킹 보러가기</Button>
             </Link>
         </Main>
     )
@@ -35,6 +49,7 @@ const Main = styled.div`
             width: 100%;
             height: 200px;
             margin: 30px auto;
+            padding: 10px 10px;
 
             border: 1px solid #ddd;
             border-radius: 10px;
