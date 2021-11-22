@@ -1,36 +1,43 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from "styled-components";
-import { getAnswer } from '../redux/modules/quizReducer';
+import { getAnswer, loadQuizFB} from '../redux/modules/quizReducer';
 import ProgressBar from './ProgressBar';
 
 const Quiz = () => {                                       
     let navi = useNavigate();
     let dispatch = useDispatch();
+
     const state = useSelector((state) => state.quiz.quiz_list);
-    
+    console.log(state)
+
+    useEffect(() => {
+        dispatch(loadQuizFB())
+    }, [])
+
+
     //왜 굳이 꼭 id? 여야하는지???
     const { id } = useParams();
-
+    const qnum = +id+1;
+    
     const nextQuiz =() =>{
-        const numId = Number(id);
-        if(numId < state.length-1){
+        if(qnum < state.length){
             //왜 리터럴 펨플릿을 써야하나요? id값이 숫자로 변환이 안되네요
-              navi(`/quiz/${numId + 1}`)
+              navi(`/quiz/${qnum}`)
             }else{
               navi(`/score`)
             }
     }
 
-    const clickFalse = (userAnswer) => {
+    const clickFalse = () => {
        dispatch(getAnswer({userAnswer: false}))
        nextQuiz()
     }
 
-    const clickTrue = (userAnswer) =>{
-        dispatch(getAnswer({userAnswer: true}))
-        nextQuiz()
+    const clickTrue = () =>{
+       dispatch(getAnswer({userAnswer: true}))
+    nextQuiz()
     }
     return (
         <>
@@ -39,7 +46,7 @@ const Quiz = () => {
         <QuizContents>
             <div className="img"><img src={state[id].questionImg} alt="img" /></div>
             <Question>
-                    <p>Question.<span>{state[id].id}</span></p>
+                    <p>Question.<span>{qnum}</span></p>
                     <p><span>{state[id].questionShow}</span>
                     {state[id].question}</p>            
             </Question>

@@ -1,5 +1,13 @@
+import {db} from '../../firebase';
+import {
+    collection,
+    getDocs,
+    addDoc,
+}from 'firebase/firestore';
+
 //default
 const initialState = {
+    is_loaded: true,
     userName : "아무개",
     userScore: 0,
     userComment: "한 마디!",
@@ -9,15 +17,8 @@ const initialState = {
          30: "아직 넷플릭스 어린이군요?! 이제 함께 더 많은 재미를 알아가보아요",
          0: "아직 넷플릭스 오리지널을 못 보셨군요?! 이제 정주행 달리시죠!"
         },
-    usersRank :[
-        {userN : "쥬비", score: 80, comment: "봉쥬르"},
-        {userN : "조세호", score: 40, comment: "안녕하세효 밥먹었세호?"},
-        {userN : "유재석", score: 90, comment: "😁"},
-        {userN : "이광수", score: 20, comment: "문제가 어렵네요 😅"},
-        {userN : "꾹이", score: 100, comment: "난 만점이지롱 👍🏻"},
-        {userN : "창희", score: 10, comment: "문제가 진짜 별로네요 ㅋ "},
-
-]};
+    usersRank :[]
+};
 
 //Action
 const GET_NAME = 'userReducer/getName';
@@ -26,8 +27,16 @@ const GET_COMMENT = 'userReducer/getComment';
 const GET_RANK = 'userReducer/getRank';
 const UPDATE_RANK = 'userReducer/updateRank';
 
+const LOAD_RANK = 'userReducer/LOAD_RANK';
+
+const SET_LOADED = 'userReducer/SET_LOADED';
+
 
 //Action Creators
+export function loadRank (userRank){
+    return {type:LOAD_RANK, userRank}
+}
+
 export function getName(user){
  return { type: GET_NAME, user}
 }
@@ -48,11 +57,41 @@ export function updateRank(userRank){
     return { type: UPDATE_RANK, userRank}
 }
 
+export const setLoaded = (is_loaded) =>{
+    return {type: SET_LOADED, is_loaded}
+}
 
+//middlewares
+export function loadRankFB(){
+    return async function(dispatch){
+        dispatch(setLoaded(false))
+        const rank_data = await getDocs(collection(db, "ranking"))
+
+        let rank_list = [];
+        rank_data.forEach((doc) => {
+            rank_list.push({id: doc.id, ...doc.data()})
+        })
+        dispatch(loadRank(rank_list))
+    }
+
+}
+
+export function addRankFB(userRank){
+   return async function (dispatch){
+       const docRef = await addDoc(collection(db, "ranking"), userRank)
+       dispatch(updateRank(userRank))
+   }
+}
 
 //Reducer
 export default function getUser(state = initialState, action){
     switch(action.type){
+        case SET_LOADED : {
+            return  {...state, is_loaded: action.is_loaded}
+        }
+        case LOAD_RANK :{
+            return {...state.usersRank, usersRank:action.userRank, is_loaded: true};
+        }
         case GET_NAME : 
         {
             return {...state, userName:action.user};
@@ -73,14 +112,14 @@ export default function getUser(state = initialState, action){
         case GET_RANK : 
         {
     
-            return {...state.userRank, usersRank:action.ranking};
+            return {...state.userRank, usersRank:action.ranking, is_loaded: true};
             
         }
 
         case UPDATE_RANK : 
         {
     
-            return {...state.usersRank, usersRank:[...state.usersRank, action.userRank]};
+            return {...state.usersRank, usersRank:[...state.usersRank, action.userRank, ], is_loaded: true};
             
         }
       
