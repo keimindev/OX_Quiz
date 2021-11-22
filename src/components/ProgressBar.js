@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const ProgressBar = () => {
     const state = useSelector((state) => state.quiz.quiz_list);
     const userAState = useSelector((state) => state.quiz.userAnswer_list);
-
+   console.log(userAState)
     //get progress bar % 
     let count = 0;
 

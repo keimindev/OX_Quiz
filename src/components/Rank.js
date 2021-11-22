@@ -1,12 +1,18 @@
-import React, { useRef} from 'react'
-import {useSelector } from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import React, { useRef, useEffect } from 'react'
+import {useSelector, useDispatch } from 'react-redux'
+import { deleteAnswer } from '../redux/modules/quizReducer'
 import styled from 'styled-components'
+import { loadRankFB } from '../redux/modules/userReducer'
+
 
 const Rank = () => {
     const userInfo = useSelector(state => state.getUser.usersRank)
-    const nav = useNavigate();
+    
+    useEffect(() => {
+        dispatch(loadRankFB())
+    }, [])
 
+    const dispatch = useDispatch()
     const userslist = userInfo.sort(( x, y ) => {
         if(x.score > y.score){return -1}
         if( x.score < y.score){return 1}
@@ -14,9 +20,10 @@ const Rank = () => {
     });
 
     const currentUser = useRef(null)
-
-    const resetUserAnswer = () =>{
-        nav('/')
+    const reset = () => {
+        window.location.href = "/";
+        dispatch(deleteAnswer())
+    
     }
 
     return (
@@ -24,18 +31,18 @@ const Rank = () => {
             <Title><span>{userInfo.length}</span> 명의 사람 중에 당신은?</Title>
             <RankList>
                 {userslist.map( (user, i) => {
-                    if(user.current){
-                        return (
-                            <List cur={true} key={i} ref={currentUser}>
+                    if(user.current) {
+                        return(
+                            <List key={i} cur={true} ref={currentUser}>
                             <p><span>{i+1}</span>등</p>
                             <div>
                                 <p>{user.userN}</p>
                                 <p>{user.comment}</p>
                             </div>
                         </List>
-                        ) 
-                    }else{
-                        return (
+                       )        
+                    };
+                    return (
                             <List key={i}>
                             <p><span>{i+1}</span>등</p>
                             <div>
@@ -43,11 +50,10 @@ const Rank = () => {
                                 <p>{user.comment}</p>
                             </div>
                         </List>
-                        )
-                    }
+                    )
                 })}
             </RankList> 
-            <Button onClick={resetUserAnswer}>재도전하기</Button>
+            <Button onClick={reset}>재도전하기</Button>
         </Main>
     )
 }

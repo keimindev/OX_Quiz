@@ -2,19 +2,26 @@ import React, {useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
-import { getComment, updateRank } from '../redux/modules/userReducer'
+import { addRankFB, getComment, updateRank } from '../redux/modules/userReducer'
+import { db } from '../firebase';
+import { collection, addDoc} from 'firebase/firestore'
 
 const Report = () => {
     const user = useSelector(state => state.getUser)
     const dispatch = useDispatch()
     const text = useRef()
-    const getUserComment = () =>{
+    const getUserComment = async () =>{
         dispatch(getComment(text.current.value))
-        dispatch(updateRank(
-            {userN : user.userName,
+        dispatch(addRankFB({
+            userN : user.userName,
             score: user.userScore,
-            comment: text.current.value}
-            ))
+            comment: text.current.value
+        }))
+        // dispatch(updateRank(
+        //     {userN : user.userName,
+        //         score: user.userScore,
+        //         comment: text.current.value}
+        //     ))
     }
 
     return (

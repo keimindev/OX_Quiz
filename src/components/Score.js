@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useSelector , useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
@@ -6,28 +6,29 @@ import { getUserScore } from '../redux/modules/userReducer'
 
 const Score = () => {
    const userInfo = useSelector((state) => state.getUser)
-   const rankState = useSelector((state) => state.getUser.usersRank)
-   console.log(rankState)
    const dispatch = useDispatch()
 
    //get Score
    const state = useSelector((state) => state.quiz.quiz_list);
    const userAState = useSelector((state) => state.quiz.userAnswer_list);
+   const mentions = useSelector((state) => state.getUser.scorelist)
+   console.log(mentions)
+   
    let scoreArr = state.filter( (a, i) => a.answer === userAState[i]);
-   const scoreper = scoreArr.length * 10;
-
-   const getScore = () => {
-       dispatch(getUserScore(scoreper))
-   }
-
+   let scoreper = scoreArr.length * 10;
+ 
    //scorelist 
    let scoreMention = '';
-   const mentions = useSelector((state) => state.getUser.scorelist)
-   Object.keys(mentions).map((c , i) => {
-    if(scoreper >= c){
+   Object.keys(mentions).map( (c, idx) => {
+    if(scoreper >= parseInt(c)){
       return scoreMention = mentions[c]
     }
    })
+
+   const getScore = () => {
+     dispatch(getUserScore(scoreper))
+}
+
    
 
     return (
