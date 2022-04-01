@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 import store from './redux/quizConfig';
 import './index.css';
 import App from './App';
-
+import "./language/i18n"
 
 ReactDOM.render(
   <Provider store={store}>

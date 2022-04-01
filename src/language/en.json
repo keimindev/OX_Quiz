@@ -1,0 +1,13 @@
+{
+    "title1" : "How much do I know about Netflix Original Series?",
+    "title2" : "Let's check your geek level!?!",
+    "title3" : "{{people}} users played it.",
+    "score" : "What's {{name}} score ?",
+    "yourscore" : " points!",
+    "comment" : "Leave Your Comment",
+    "leaveComment" : "Comments to {{name}}",
+    "checkRank" : "Check Your Rank",
+    "ranktitle" : "What's your ranking among {{people}} users ?",
+    "rank" : "Rank",
+    "retry" : "Try Again"
+}

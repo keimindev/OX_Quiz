@@ -1,0 +1,14 @@
+{
+    "title1" : "나는 Netflix Original Series에 대해서 얼마나 알고 있을까?",
+    "title2" : "나의 덕력은?!",
+    "title3" : "{{people}}명의 사용자가 플레이했습니다.",
+    "scoreTtitle" : "Netflix Original Series 퀴즈에 대한",
+    "score" : "{{name}} 님의 점수는",
+    "yourscore" : "점 입니다!",
+    "comment" : "한 마디 남기기",
+    "leaveComment" : "{{name}} 에게 남기는 한마디",
+    "checkRank" : "랭킹 보러가기",
+    "ranktitle" : "{{people}} 명 중에 당신의 랭킹은?",
+    "rank" : "등",
+    "retry" : "재도전하기"
+}
