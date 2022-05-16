@@ -9,7 +9,7 @@ const initialState = {
       id: "",
       question: "",
       questionShow: "",
-      questionImg: "/assets/ex10.gif",
+      questionImg: "",
       answer: false,
     },
   ],

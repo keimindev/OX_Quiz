@@ -30,7 +30,8 @@ const Report = () => {
     <Main>
       <img src="/assets/logo.jpg" alt="logo" />
       <p>{t("leaveComment", {name})}</p>
-      <input type="text" ref={text} />
+      <textarea id="story" name="story"
+          rows="6" cols="33" ref={text} maxlength="300"/>
       <Link to="/rank">
         <Button onClick={getUserComment}>{t("checkRank")}</Button>
       </Link>
@@ -50,11 +51,11 @@ const Main = styled.div`
     margin: 30px 0;
   }
 
-  input {
+  textarea{
     display: block;
     width: 100%;
-    height: 200px;
-    margin: 30px auto;
+    height: 150px;
+    margin: 50px auto;
     padding: 10px 10px;
 
     border: 1px solid #ddd;

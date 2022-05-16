@@ -48,9 +48,7 @@ const Score = () => {
         <Result>
           <p>{t("scoreTitle")}</p>
           <p>{t("score", {name})}</p>
-          <p>
-            <span>{scoreper}</span><span>{t("yourscore")}</span>
-          </p>
+          <p>{scoreper}</p>
         </Result>
         <Mention>{scoreMention}</Mention>
         <Link to="/report">
@@ -69,48 +67,33 @@ const Result = styled.div`
   margin: 30px 0;
 
   p:nth-child(1) {
-    height: 50px;
-    line-height: 50px;
-
-    span {
-      padding: 5px 15px;
-      border-radius: 15px;
-      background-color: #d81f26;
-      color: #fff;
-      font-size: 20px;
-      font-weight: 500;
-      margin-right: 5px;
-    }
+    padding: 10px 5px;
+    border-radius: 15px;
+    background-color: #d81f26;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+  
   }
 
   p:nth-child(2) {
-    height: 50px;
-    line-height: 50px;
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: 500;
 
-    span {
-      padding: 5px 15px;
-      border-radius: 15px;
-      background-color: #d81f26;
-      color: #fff;
-      font-size: 20px;
-      font-weight: 500;
-      margin-right: 5px;
-    }
   }
 
   p:nth-child(3) {
-    height: 160px;
-    line-height: 160px;
-
-    span {
-      padding: 30px 25px;
-      border-radius: 50%;
-      background-color: #222;
-      color: #fff;
-      font-size: 40px;
-      font-weight: 500;
-      margin-right: 5px;
-    }
+    height: 130px;
+    width: 130px;
+    line-height: 130px;
+    margin: 40px auto;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #222;
+    color: #fff;
+    font-size: 40px;
+    font-weight: 500;
   }
 `;
 
@@ -124,10 +107,10 @@ const ReBtn = styled.button`
   border-radius: 15px;
   border: 0;
   outline: 0;
-  background-color: #fff;
+  background-color: #d81f26;
   font-family: "GongGothicMedium";
   cursor: pointer;
-  color: #222;
+  color: #fff;
   transition: all 0.5s ease;
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
