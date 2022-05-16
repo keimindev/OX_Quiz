@@ -64,7 +64,6 @@ const Start = () => {
 const Wrapper = styled.div`
   padding-top: 20px;
   
-
 `;
 
 const Lng = styled.div`

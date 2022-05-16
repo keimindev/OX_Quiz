@@ -60,8 +60,8 @@ const Quiz = () => {
         </QuizContents>
         <AnswerBox>
           <ul>
-            <li onClick={clickTrue}>⭕</li>
             <li onClick={clickFalse}>❌</li>
+            <li onClick={clickTrue}>⭕</li>
           </ul>
         </AnswerBox>
 				</ContentBox>

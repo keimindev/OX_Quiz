@@ -18,7 +18,7 @@ const Score = () => {
   const state = useSelector((state) => state.quiz.quiz_list);
   const userAState = useSelector((state) => state.quiz.userAnswer_list);
   let scoreArr = state.filter((a, i) => a.answer === userAState[i]);
-  let scoreper = scoreArr.length * 10;
+  let scoreper = scoreArr.length * 5;
 
 
   //scorelist
