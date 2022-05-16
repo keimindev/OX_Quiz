@@ -64,7 +64,6 @@ export const loadQuizFB = (lang) => {
 export default function quiz(state = initialState, action = {}) {
   switch (action.type) {
 		case CHANGE_LAN: {
-			console.log(action.language)
       return { ...state, language: action.language};
     }
     case LOAD: {

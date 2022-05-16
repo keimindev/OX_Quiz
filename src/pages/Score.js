@@ -1,13 +1,15 @@
-import { t } from "i18next";
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getUserScore } from "../redux/modules/userReducer";
+import { scorelist, scorelistEng } from "../utils/util";
 import styled from "styled-components";
 
 const Score = () => {
   const userInfo = useSelector((state) => state.getUser);
+  //사용 언어
+  const userLan = useSelector((state) => state.quiz.language);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const name = userInfo.userName;
@@ -15,18 +17,26 @@ const Score = () => {
   //get Score
   const state = useSelector((state) => state.quiz.quiz_list);
   const userAState = useSelector((state) => state.quiz.userAnswer_list);
-  const mentions = useSelector((state) => state.getUser.scorelist);
-
   let scoreArr = state.filter((a, i) => a.answer === userAState[i]);
   let scoreper = scoreArr.length * 10;
 
+
   //scorelist
   let scoreMention = "";
-  Object.keys(mentions).map((c, idx) => {
-    if (scoreper >= parseInt(c)) {
-      return (scoreMention = mentions[c]);
-    }
-  });
+  if(userLan === "kr"){
+      Object.keys(scorelist).map((c, idx) => {
+        if (scoreper >= parseInt(c)) {
+          return (scoreMention = scorelist[c]);
+        }
+      });
+    }else{
+      Object.keys(scorelistEng).map((c, idx) => {
+        if (scoreper >= parseInt(c)) {
+          return (scoreMention = scorelistEng[c]);
+        }
+      });
+    };
+
 
   const getScore = () => {
     dispatch(getUserScore(scoreper));

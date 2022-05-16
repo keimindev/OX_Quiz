@@ -27,7 +27,7 @@ const Start = () => {
   return (
     <Wrapper>
       <Lng>
-        <button onClick={() => {
+        <button data-testid="engbtn" onClick={() => {
           i18n.changeLanguage("en")
           dispatch(changeLang("en"))
           }}>ENG</button>
