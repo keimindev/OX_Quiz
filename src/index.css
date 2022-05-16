@@ -15,5 +15,6 @@ a,
 a:visited,
 a:active{
   text-decoration: none;
+  color: #222;
 
 }

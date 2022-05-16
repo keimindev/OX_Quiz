@@ -63,7 +63,7 @@ const Start = () => {
 
 const Wrapper = styled.div`
   padding-top: 20px;
-
+  
 
 `;
 
@@ -83,6 +83,12 @@ const Lng = styled.div`
     &:hover {
       color: #d81f26;
     }
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-right: 40px;
+    margin: 15px 0 40px 0;
+  
   }
 `;
 const ImgBox = styled.div`
@@ -129,6 +135,12 @@ const Contents = styled.div`
       padding: 5px 10px;
       border-radius: 5px;
       margin: 5px 5px;
+
+      @media ${({ theme }) => theme.device.mobile} {
+        font-size: 15px;
+        padding: 5px 8px;
+  
+  }
     }
   }
 `;

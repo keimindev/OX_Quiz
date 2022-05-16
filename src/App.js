@@ -48,5 +48,6 @@ const Wrap = styled.div`
     height: 100%;
     border-radius: 0px;
     padding-top: 0px;
+    padding-bottom: 60px;
   }
 `;
