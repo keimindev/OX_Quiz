@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { getAnswer, loadQuizFB } from "../redux/modules/quizReducer";
 import ProgressBar from "../components/ProgressBar";
+import Spinner from '../components/Spinner';
 
 const Quiz = () => {
   let nav = useNavigate();
   let dispatch = useDispatch();
   const state = useSelector((state) => state.quiz.quiz_list);
+  const loaded = useSelector((state) => state.quiz.is_loaded);
   const lang = useSelector((state) => state.quiz.language);
-  console.log(lang)
+
   useEffect(() => {
     dispatch(loadQuizFB(lang));
   }, []);
@@ -39,7 +41,8 @@ const Quiz = () => {
   return (
     <>
       <Wrapper>
-			<ContentBox>
+        {loaded ? <>
+          <ContentBox>
         <ProgressBar />
         <QuizContents>
           <div className="img">
@@ -62,6 +65,8 @@ const Quiz = () => {
           </ul>
         </AnswerBox>
 				</ContentBox>
+        </> :
+        <><Spinner /></>}
       </Wrapper>
     </>
   );
