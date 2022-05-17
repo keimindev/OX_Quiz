@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAnswer } from "../redux/modules/quizReducer";
 import { loadRankFB } from "../redux/modules/userReducer";
@@ -6,14 +6,19 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const Rank = () => {
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.getUser.usersRank);
+  const name = useSelector((state) => state.getUser.userName);
   const { t } = useTranslation();
   const people = userInfo.length;
+  //current user info
+  const [curName, setCurName] = useState(name);
+
   useEffect(() => {
     dispatch(loadRankFB());
   }, []);
 
-  const dispatch = useDispatch();
+
   const userslist = userInfo.sort((x, y) => {
     if (x.score > y.score) {
       return -1;
@@ -26,20 +31,25 @@ const Rank = () => {
     }
   });
 
-  const currentUser = useRef(null);
   const reset = () => {
     window.location.href = "/";
     dispatch(deleteAnswer());
   };
 
+  //current user rank
+  const yourRank = userslist.findIndex(v => v.userN === curName);
+
   return (
     <Main>
       <Title>{t("ranktitle", { people })}</Title>
+      <Result>
+        <p><span>{yourRank + 1} {t("rank")}</span>/ {userslist.length}</p>
+      </Result>
       <RankList>
         {userslist.map((user, i) => {
-          if (user.current) {
+          if(user.id){
             return (
-              <List key={i} cur={true} ref={currentUser}>
+              <List key={i} cur={user.userN === curName ? true : false}>
                 <p>
                   <span>{i + 1}</span>
                   {t("rank")}
@@ -51,19 +61,8 @@ const Rank = () => {
               </List>
             );
           }
-          return (
-            <List key={i}>
-              <p>
-                <span>{i + 1}</span>
-                {t("rank")}
-              </p>
-              <div>
-                <p>{user.userN}</p>
-                <p>{user.comment}</p>
-              </div>
-            </List>
-          );
-        })}
+          }
+        )}
       </RankList>
       <Button onClick={reset}>{t("retry")}</Button>
     </Main>
@@ -73,6 +72,7 @@ const Rank = () => {
 const Main = styled.div`
   height: 100%;
   padding: 20px 30px;
+  padding-bottom: 40px;
   position: relative;
 `;
 
@@ -83,6 +83,17 @@ const Title = styled.div`
     border-radius: 15px;
     background-color: #d81f26;
     color: #fff;
+  }
+`;
+
+const Result = styled.div`
+padding: 20px 0;
+  p {
+    span {
+      font-size: 30px;
+      margin: 0 10px;
+      color: #d81f26;
+    }
   }
 `;
 
@@ -98,8 +109,8 @@ const List = styled.div`
   border: 1px solid red;
   border-radius: 10px;
   margin: 10px 0;
-  background-color: ${(props) => (props.cur ? "#ac73d2" : "#ffffff")};
-
+  background-color: ${(props) => (props.cur ? "#d81f26" : "#ffffff")};
+  color: ${(props) => (props.cur ? "#fff" : "#222")};
   display: grid;
   grid-template-columns: 30% 70%;
   align-items: center;

@@ -31,7 +31,7 @@ const Report = () => {
       <img src="/assets/logo.jpg" alt="logo" />
       <p>{t("leaveComment", {name})}</p>
       <textarea id="story" name="story"
-          rows="6" cols="33" ref={text} maxlength="300"/>
+          rows="6" cols="33" ref={text} maxLength="300"/>
       <Link to="/rank">
         <Button onClick={getUserComment}>{t("checkRank")}</Button>
       </Link>

@@ -15,6 +15,7 @@ const Start = () => {
   const { t } = useTranslation();
   const userInfo = useSelector((state) => state.getUser.usersRank);
   const people = userInfo.length;
+  const lang =useSelector((state) => state.quiz.language);
 
   const getUserName = () => {
     dispatch(getName(text.current.value));
@@ -30,11 +31,11 @@ const Start = () => {
         <button data-testid="engbtn" onClick={() => {
           i18n.changeLanguage("en")
           dispatch(changeLang("en"))
-          }}>ENG</button>
+          }} style={{ color: lang === "en" ? "#d81f26" : "#222"}}>ENG</button>
         <button onClick={() => {
           i18n.changeLanguage("kr")
           dispatch(changeLang("kr"))
-          }}>KOR</button>
+          }} style={{ color: lang === "kr" ? "#d81f26" : "#222"}}>KOR</button>
       </Lng>
       <ImgBox>
         <img src="/assets/llogo.png" alt="logo" />
