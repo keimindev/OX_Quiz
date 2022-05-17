@@ -43,11 +43,21 @@ const Wrap = styled.div`
   border-radius: 10px;
   font-family: "GongGothicMedium";
 
+  position: fixed;
+  top:50%;
+  left: 20%;
+  transform: translate(50%, -50%);
+
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
-    height: 100%;
+    height: 110vh;
     border-radius: 0px;
     padding-top: 0px;
     padding-bottom: 60px;
+
+    position: absolute;
+    top:0%;
+    left: 0%;
+    transform: translate(0%, 0%);
   }
 `;
