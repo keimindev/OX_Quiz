@@ -78,6 +78,7 @@ const Lng = styled.div`
     margin: 5px 8px;
     border: 0;
     outline: 0;
+    background-color: transparent;
     cursor: pointer;
 
     &:hover {
