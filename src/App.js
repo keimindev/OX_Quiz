@@ -35,29 +35,28 @@ export default App;
 
 const Wrap = styled.div`
   width: 500px;
-  height: 100vh;
+  height: 880px;
   margin: 0 auto;
-  padding-top: 20px;
   background-color: #eee;
   text-align: center;
   border-radius: 10px;
   font-family: "GongGothicMedium";
 
   position: fixed;
-  top:50%;
-  left: 20%;
-  transform: translate(50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
-    height: 110vh;
+    height: 920px;
     border-radius: 0px;
     padding-top: 0px;
     padding-bottom: 60px;
 
     position: absolute;
-    top:0%;
+    top: 0%;
     left: 0%;
-    transform: translate(0%, 0%);
+    transform: translate(0%, 0%)
   }
 `;
