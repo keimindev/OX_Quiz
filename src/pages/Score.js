@@ -99,6 +99,10 @@ const Result = styled.div`
 
 const Mention = styled.div`
   padding: 0 80px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 0 20px;
+  }
 `;
 const ReBtn = styled.button`
   width: 180px;

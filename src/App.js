@@ -35,7 +35,7 @@ export default App;
 
 const Wrap = styled.div`
   width: 500px;
-  height: 880px;
+  height: 900px;
   margin: 0 auto;
   background-color: #eee;
   text-align: center;
@@ -49,10 +49,10 @@ const Wrap = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
-    height: 920px;
+    height: 100vh;
     border-radius: 0px;
     padding-top: 0px;
-    padding-bottom: 60px;
+    padding-bottom: 50px;
 
     position: absolute;
     top: 0%;

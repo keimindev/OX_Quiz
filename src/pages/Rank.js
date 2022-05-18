@@ -93,6 +93,11 @@ padding: 20px 0;
       font-size: 30px;
       margin: 0 10px;
       color: #d81f26;
+
+
+      @media ${({ theme }) => theme.device.mobile} {
+      font-size: 24px;
+  }
     }
   }
 `;
@@ -103,9 +108,8 @@ const RankList = styled.div`
 `;
 
 const List = styled.div`
-  height: 100px;
-  max-height: 400px;
-  padding: 5px 10px;
+  max-height: 220px;
+  padding: 15px 10px;
   border: 1px solid red;
   border-radius: 10px;
   margin: 10px 0;
@@ -114,11 +118,16 @@ const List = styled.div`
   display: grid;
   grid-template-columns: 30% 70%;
   align-items: center;
+  overflow-y: hidden;
 
   p {
     span {
       font-size: 30px;
-      margin: 0 10px;
+      margin: 0 10px; 
+
+      @media ${({ theme }) => theme.device.mobile} {
+      font-size: 24px;
+  }
     }
   }
 
@@ -131,10 +140,17 @@ const List = styled.div`
 
     p:nth-child(1) {
       font-size: 20px;
+
+      @media ${({ theme }) => theme.device.mobile} {
+      font-size: 16px;
+  }
     }
 
     p:nth-child(2) {
       font-size: 15px;
+      @media ${({ theme }) => theme.device.mobile} {
+      font-size: 13px;
+  }
     }
   }
 `;
@@ -152,13 +168,23 @@ const Button = styled.button`
   color: #fff;
 
   position: absolute;
-  bottom: 100px;
-  left: 180px;
+  bottom: 10%;
+  left: 30%;
+  transform: translate(10%, 30%);
   transition: all 0.5s ease;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
+
+   
+  @media ${({ theme }) => theme.device.mobile} {
+    position: absolute;
+    bottom: 18%;
+    left: 25%;
+    transform: translate(18%, 25%);
+  }
+
 `;
 
 export default Rank;

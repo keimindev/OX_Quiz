@@ -64,6 +64,11 @@ const Start = () => {
 
 const Wrapper = styled.div`
   padding-top: 20px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-top: 40px;
+  }
+
   
 `;
 
@@ -84,11 +89,16 @@ const Lng = styled.div`
     &:hover {
       color: #d81f26;
     }
+
+    
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 14px;  
+  }
   }
 
   @media ${({ theme }) => theme.device.mobile} {
     padding-right: 40px;
-    margin: 15px 0 40px 0;
+    margin: 15px 0 30px 0;
   
   }
 `;
@@ -96,6 +106,7 @@ const ImgBox = styled.div`
   img {
     width: 70%;
   }
+
 `;
 
 const Title = styled.div`
@@ -105,17 +116,23 @@ const Title = styled.div`
   line-height: 45px;
   margin-top: 80px;
 
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 0 40px;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
   p:nth-child(3) {
     padding: 5px 15px;
     color: #d81f26;
     font-weight: 500;
     font-size: 16px;
+
+    @media ${({ theme }) => theme.device.mobile} {
+    font-size: 14px;
+  }
   }
 
-  @media ${({ theme }) => theme.device.mobile} {
-    padding: 0 20px;
-    margin-bottom: 20px;
-  }
 `;
 
 const Contents = styled.div`
@@ -130,6 +147,10 @@ const Contents = styled.div`
     text-align: center;
     padding: 0 90px;
 
+    @media ${({ theme }) => theme.device.mobile} {
+      padding: 0px 30px;
+  }
+
     li {
       float: left;
       background-color: #222;
@@ -138,9 +159,9 @@ const Contents = styled.div`
       margin: 5px 5px;
 
       @media ${({ theme }) => theme.device.mobile} {
-        font-size: 15px;
+        font-size: 13px;
         padding: 5px 8px;
-  
+        margin: 3px 5px;
   }
     }
   }

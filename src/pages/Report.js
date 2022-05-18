@@ -30,8 +30,7 @@ const Report = () => {
     <Main>
       <img src="/assets/logo.jpg" alt="logo" />
       <p>{t("leaveComment", {name})}</p>
-      <textarea id="story" name="story"
-          rows="6" cols="33" ref={text} maxLength="300"/>
+      <textarea id="story" name="story" ref={text} maxLength={150} />
       <Link to="/rank">
         <Button onClick={getUserComment}>{t("checkRank")}</Button>
       </Link>
@@ -41,6 +40,10 @@ const Report = () => {
 
 const Main = styled.div`
   padding: 100px 80px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 130px 20px;
+  }
 
   img {
     width: 150px;

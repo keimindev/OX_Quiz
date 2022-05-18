@@ -1,4 +1,4 @@
-export const contents = ["Stranger Things","My Name", "Squid Game", "House Of Cards", "You", "Sex Education","D.P."]
+export const contents = ["Stranger Things","My Name", "Squid Game", "House Of Cards", "You", "Sex Education","D.P.","The Queen's Gambit", "Bridgerton"]
 
 
 export const scorelist = 
