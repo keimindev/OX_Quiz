@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getName, loadRankFB } from "../redux/modules/userReducer";
 import {  changeLang } from "../redux/modules/quizReducer";
@@ -10,16 +10,42 @@ import styled from "styled-components";
 
 
 const Start = () => {
-  const text = useRef(null);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const userInfo = useSelector((state) => state.getUser.usersRank);
   const people = userInfo.length;
   const lang =useSelector((state) => state.quiz.language);
 
+  const [name, setName] = useState('')
+  const [err, setErr] = useState(false);
+
   const getUserName = () => {
-    dispatch(getName(text.current.value));
+    if(name != ''){
+      dispatch(getName(name));
+      setErr(false)
+    }else{
+      setErr(true)
+    }
   };
+
+  const handleErrorMessage = () =>{
+      return (
+        <Err>Please Enter Your Name!</Err>
+      )
+    
+  }
+
+  useEffect(() => {
+    if(name == ''){
+      setErr(true)
+    }else{
+      setErr(false)
+    }
+  },[name])
+
+  const handleOnChangeName = (e) => {
+    setName(e.target.value)
+  }
 
   useEffect(() => {
     dispatch(loadRankFB())
@@ -53,11 +79,14 @@ const Start = () => {
         </ul>
       </Contents>
       <InputBox>
-        <input type="text" placeholder="please your name" ref={text} />
+      {err && handleErrorMessage()}
+        <input type="text" placeholder="please your name" onChange={ (e) => {handleOnChangeName(e)}}/>
         <Link to="/quiz/0">
-          <Button onClick={getUserName}>Start</Button>
+          <Button disabled={name != "" ? false: true} onClick={getUserName}>Start</Button>
         </Link>
+      
       </InputBox>
+    
     </Wrapper>
   );
 };
@@ -192,9 +221,14 @@ const InputBox = styled.div`
     border-radius: 10px;
     border: 0;
     outline: 0;
-    margin: 30px auto;
+    margin: 10px auto;
     background-color: rgb(255, 255, 255, 0.9);
   }
 `;
+
+const Err = styled.p`
+  color:  #d81f26;
+  font-size: 12px;
+  `
 
 export default Start;
