@@ -20,7 +20,7 @@ const Start = () => {
   const [err, setErr] = useState(false);
 
   const getUserName = () => {
-    if(name != ''){
+    if(name !== ''){
       dispatch(getName(name));
       setErr(false)
     }else{
