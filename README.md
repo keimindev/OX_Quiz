@@ -4,11 +4,11 @@
 
 <br/>
 
-### OX quiz based on Netflix content. Users can compare their scores and rankings with the records of other players who have taken the quiz.
+#### OX quiz based on Netflix content. Users can compare their scores and rankings with the records of other players who have taken the quiz.
 - Total 20 questions
 - Support Kor & Eng 
 
-### [Play Quiz 👉 'https://oxquiz.netlify.app/'](https://oxquiz.netlify.app/)
+### [👉 Play Quiz](https://oxquiz.netlify.app/)
 
 <br />
 
@@ -35,7 +35,7 @@ ver2.0
 - 모바일 사이즈 추가 (✅)
 - i18n를 이용한 영어버젼 추가 (✅) 
 - 최신 문제 개 수 업데이트 (✅)
-- firebase를 이용한 이미지 데이터 관리 
+- update database
 
 <br><br/>
 <br><br/>
