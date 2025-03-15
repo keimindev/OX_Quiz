@@ -94,6 +94,7 @@ const ContentBox = styled.div`
     left: 50%;
     transform: translate(-50%, 2%);
   }
+ 
 `
 
 const QuizContents = styled.div`
@@ -101,6 +102,10 @@ const QuizContents = styled.div`
   background-color: #fff;
   padding: 20px 20px 60px 20px;
   border-radius: 10px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 530px;
+  }
 
   .img {
     height: 280px;
@@ -128,6 +133,11 @@ const Question = styled.div`
     font-size: 14px;
     margin-bottom: 40px;
 
+      
+    @media ${({ theme }) => theme.device.mobile} {
+    margin-bottom: 20px;
+      }
+
     span {
       background-color: #222;
       padding: 0;
@@ -149,8 +159,8 @@ const Question = styled.div`
   
     @media ${({ theme }) => theme.device.mobile} {
       font-size: 0.9rem;
-
-}
+      width: 70%;
+      }
   }
   }
 `;

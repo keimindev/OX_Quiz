@@ -57,6 +57,6 @@ const Wrap = styled.div`
     position: absolute;
     top: 0%;
     left: 0%;
-    transform: translate(0%, 0%)
+    transform: translate(0%, 0%);
   }
 `;

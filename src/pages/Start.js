@@ -97,8 +97,6 @@ const Wrapper = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     padding-top: 40px;
   }
-
-  
 `;
 
 const Lng = styled.div`
@@ -128,14 +126,21 @@ const Lng = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     padding-right: 40px;
     margin: 15px 0 30px 0;
-  
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    padding-right: 20px;
+    margin: 10px 0 10px 0;
   }
 `;
 const ImgBox = styled.div`
   img {
     width: 70%;
-  }
 
+    @media ${({ theme }) => theme.device.tablet} {
+     width: 60%;
+  }
+  }
 `;
 
 const Title = styled.div`
